@@ -26,7 +26,7 @@ class MainViewModelTest {
     fun setup() {
         Dispatchers.setMain(testDispatcher)
         fakeRepository = FakePictureRepositoryImpl()
-        viewModel = MainViewModel(GetPicturesUseCase(fakeRepository))
+        viewModel = MainViewModel(GetPicturesUseCase(fakeRepository), testDispatcher)
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)

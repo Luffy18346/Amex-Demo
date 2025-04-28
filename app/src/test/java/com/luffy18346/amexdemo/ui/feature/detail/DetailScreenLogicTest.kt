@@ -20,7 +20,7 @@ class DetailScreenLogicTest {
             authorUrl = "dummy_author_url_1",
         )
 
-        val result = getVerticalArrangement(landscapePicture)
+        val result = getVerticalArrangement(landscapePicture.width, landscapePicture.height)
         assertEquals(Arrangement.Center, result)
     }
 
@@ -37,7 +37,7 @@ class DetailScreenLogicTest {
             authorUrl = "dummy_author_url_2",
         )
 
-        val result = getVerticalArrangement(portraitPicture)
+        val result = getVerticalArrangement(portraitPicture.width, portraitPicture.height)
         assertEquals(Arrangement.Top, result)
     }
 }
