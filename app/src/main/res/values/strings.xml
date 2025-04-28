@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Amex Demo</string>
+
+    <string name="main_screen_title">Random Pictures List</string>
+    <string name="main_screen_snackbar_pictures_loaded_message">Pictures are loaded.</string>
+    <string name="main_screen_picture_item_dimensions">%1$s x %2$s</string>
+
+    <string name="detail_screen_title">Detail Screen</string>
+
+    <string name="network_error_description">A network error occurred. Check your connection or try again</string>
+    <string name="network_error_title">Oh no!</string>
+    <string name="network_error_retry_button_text">Try again</string>
+</resources>
