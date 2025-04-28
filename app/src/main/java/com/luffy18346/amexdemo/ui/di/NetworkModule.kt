@@ -1,6 +1,6 @@
 package com.luffy18346.amexdemo.ui.di
 
-import com.luffy18346.amexdemo.data.Endpoints
+import com.luffy18346.amexdemo.BuildConfig
 import com.luffy18346.amexdemo.data.PicsumPhotosApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -27,7 +27,7 @@ val networkModule = module {
 
     single<Retrofit> {
         Retrofit.Builder()
-            .baseUrl(Endpoints.BASE_URL)
+            .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create(get()))
             .client(get())
             .build()
