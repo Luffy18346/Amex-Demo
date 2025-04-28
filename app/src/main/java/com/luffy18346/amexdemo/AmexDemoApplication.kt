@@ -1,10 +1,10 @@
 package com.luffy18346.amexdemo
 
 import android.app.Application
-import com.luffy18346.amexdemo.ui.di.appModule
-import com.luffy18346.amexdemo.domain.di.domainModule
-import com.luffy18346.amexdemo.ui.di.networkModule
-import com.luffy18346.amexdemo.ui.di.repositoryModule
+import com.luffy18346.amexdemo.di.appModule
+import com.luffy18346.amexdemo.di.domainModule
+import com.luffy18346.amexdemo.di.networkModule
+import com.luffy18346.amexdemo.di.repositoryModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext
