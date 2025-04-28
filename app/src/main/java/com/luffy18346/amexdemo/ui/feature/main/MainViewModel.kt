@@ -1,5 +1,6 @@
 package com.luffy18346.amexdemo.ui.feature.main
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.luffy18346.amexdemo.domain.model.Picture
 import com.luffy18346.amexdemo.ui.base.BaseViewModel
@@ -11,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(
     private val getPictures: GetPicturesUseCase,
-) : BaseViewModel<ViewEvent, MainContract.State, ViewSideEffect>() {
+) : BaseViewModel<MainContract.Event, MainContract.State, MainContract.Effect>() {
 
     init {
         getPictures()
@@ -19,22 +20,21 @@ class MainViewModel(
 
     override fun setInitialState() = MainContract.State.initial()
 
-    override fun handleEvents(event: ViewEvent) {
+    override fun handleEvents(event: MainContract.Event) {
         when (event) {
             is MainContract.Event.PictureSelection -> setEffect {
                 MainContract.Effect.Navigation.ToPictureDetail(
-                    event.picture.id
+                    event.picture
                 )
             }
 
             is MainContract.Event.Retry -> getPictures()
-            is DetailContract.Event.BackButtonClicked -> setEffect { DetailContract.Effect.Navigation.Back }
         }
     }
 
     fun getPictures() {
         setState { copy(isLoading = true, isError = false) }
-        viewModelScope.launch {
+        viewModelScope.launch { // Main Dispatcher
             getPictures.invoke().onSuccess { it ->
                 setState { copy(data = it, isLoading = false) }
             }.onFailure {

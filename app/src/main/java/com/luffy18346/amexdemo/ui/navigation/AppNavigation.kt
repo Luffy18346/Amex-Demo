@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.luffy18346.amexdemo.ui.navigation.Navigation.Routes.PICTURES
-import com.luffy18346.amexdemo.ui.navigation.Navigation.Routes.PICTURES_PARENT
 import com.luffy18346.amexdemo.ui.navigation.routes.detailScreenRoute
 import com.luffy18346.amexdemo.ui.navigation.routes.mainScreenRoute
 
@@ -17,7 +16,6 @@ fun AppNavigation() {
     NavHost(
         navController = navController,
         startDestination = PICTURES,
-        route = PICTURES_PARENT
     ) {
         mainScreenRoute(navController = navController)
         detailScreenRoute(navController = navController)

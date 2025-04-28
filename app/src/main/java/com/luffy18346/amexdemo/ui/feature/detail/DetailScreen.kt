@@ -34,9 +34,13 @@ import java.net.URL
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(
-    picture: Picture?,
-    effectFlow: Flow<ViewSideEffect>,
-    onEventSent: (event: ViewEvent) -> Unit,
+    fileName: String,
+    imageUrl: String,
+    authorName: String,
+    imageWidth: Long,
+    imageHeight: Long,
+    effectFlow: Flow<DetailContract.Effect>,
+    onEventSent: (event: DetailContract.Event) -> Unit,
     onNavigationRequested: (navigationEffect: DetailContract.Effect.Navigation) -> Unit,
 ) {
 
@@ -57,12 +61,12 @@ fun DetailScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = picture?.filename ?: stringResource(R.string.detail_screen_title),
+                        text = fileName,
                     )
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary,
+                    titleContentColor = MaterialTheme.colorScheme.onSurface,
+                    containerColor = MaterialTheme.colorScheme.surfaceContainer,
                 ),
                 navigationIcon = {
                     IconButton(onClick = {
@@ -78,15 +82,15 @@ fun DetailScreen(
             )
         }
     ) {
-        picture?.let { picture ->
+        imageUrl.let { picture ->
             Column(
                 modifier = Modifier
                     .padding(paddingValues = it)
                     .fillMaxSize()
                     .verticalScroll(rememberScrollState()),
-                verticalArrangement = getVerticalArrangement(picture)
+                verticalArrangement = getVerticalArrangement(imageWidth, imageHeight)
             ) {
-                NetworkImage(picture.getImageUrl(), picture.filename)
+                NetworkImage(picture, fileName)
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -95,7 +99,7 @@ fun DetailScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = picture.author,
+                        text = authorName,
                         style = MaterialTheme.typography.titleLarge.copy(
                             color = MaterialTheme.colorScheme.primary,
                             fontWeight = FontWeight.Bold,

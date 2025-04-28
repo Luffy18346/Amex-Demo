@@ -24,8 +24,8 @@ import kotlinx.coroutines.flow.Flow
 @Composable
 fun MainScreen(
     state: MainContract.State,
-    effectFlow: Flow<ViewSideEffect>,
-    onEventSent: (event: ViewEvent) -> Unit,
+    effectFlow: Flow<MainContract.Effect>,
+    onEventSent: (event: MainContract.Event) -> Unit,
     onNavigationRequested: (navigationEffect: MainContract.Effect.Navigation) -> Unit,
 ) {
 
@@ -50,8 +50,8 @@ fun MainScreen(
                     )
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    titleContentColor = MaterialTheme.colorScheme.primary,
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.onSurface,
+                    containerColor = MaterialTheme.colorScheme.surfaceContainer,
                 )
             )
         },

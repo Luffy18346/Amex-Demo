@@ -13,7 +13,7 @@ class MainContract {
 
     data class State(
         val isLoading: Boolean,
-        val     isError: Boolean,
+        val isError: Boolean,
         val data: List<Picture>?,
     ) : ViewState {
 
@@ -28,7 +28,7 @@ class MainContract {
 
     sealed class Effect : ViewSideEffect {
         sealed class Navigation : Effect() {
-            data class ToPictureDetail(val pictureId: Long) : Navigation()
+            data class ToPictureDetail(val picture: Picture) : Navigation()
         }
     }
 }

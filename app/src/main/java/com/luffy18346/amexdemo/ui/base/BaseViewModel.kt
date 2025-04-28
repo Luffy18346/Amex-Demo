@@ -27,7 +27,9 @@ abstract class BaseViewModel<Event: ViewEvent, UiState: ViewState, Effect: ViewS
     abstract fun setInitialState(): UiState
     abstract fun handleEvents(event: Event)
 
-    private val _viewState: MutableStateFlow<UiState> = MutableStateFlow(setInitialState())
+    private val initialState by lazy { setInitialState() }
+
+    private val _viewState: MutableStateFlow<UiState> = MutableStateFlow(initialState)
     val viewState: StateFlow<UiState> = _viewState.asStateFlow()
 
     private val _event: MutableSharedFlow<Event> = MutableSharedFlow()
