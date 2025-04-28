@@ -1,4 +1,4 @@
-package com.luffy18346.amexdemo.data.di
+package com.luffy18346.amexdemo.ui.di
 
 import com.luffy18346.amexdemo.data.Endpoints
 import com.luffy18346.amexdemo.data.PicsumPhotosApi
@@ -10,7 +10,7 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-val dataModule = module {
+val networkModule = module {
     single<OkHttpClient> {
         OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().apply {

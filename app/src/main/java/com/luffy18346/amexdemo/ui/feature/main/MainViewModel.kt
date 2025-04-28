@@ -1,17 +1,15 @@
 package com.luffy18346.amexdemo.ui.feature.main
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.luffy18346.amexdemo.domain.model.Picture
 import com.luffy18346.amexdemo.ui.base.BaseViewModel
 import com.luffy18346.amexdemo.domain.use_case.GetPicturesUseCase
-import com.luffy18346.amexdemo.ui.base.ScreenContract.ViewEvent
-import com.luffy18346.amexdemo.ui.base.ScreenContract.ViewSideEffect
-import com.luffy18346.amexdemo.ui.feature.detail.DetailContract
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
 class MainViewModel(
     private val getPictures: GetPicturesUseCase,
+    private val ioDispatcher: CoroutineDispatcher
 ) : BaseViewModel<MainContract.Event, MainContract.State, MainContract.Effect>() {
 
     init {
@@ -34,8 +32,8 @@ class MainViewModel(
 
     fun getPictures() {
         setState { copy(isLoading = true, isError = false) }
-        viewModelScope.launch { // Main Dispatcher
-            getPictures.invoke().onSuccess { it ->
+        viewModelScope.launch(ioDispatcher) {
+            getPictures.invoke().onSuccess {
                 setState { copy(data = it, isLoading = false) }
             }.onFailure {
                 setState { copy(isError = true, isLoading = false) }
