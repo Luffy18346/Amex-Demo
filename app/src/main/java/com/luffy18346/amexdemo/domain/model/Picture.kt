@@ -1,6 +1,6 @@
 package com.luffy18346.amexdemo.domain.model
 
-import com.luffy18346.amexdemo.data.model.PictureResponse
+import android.net.Uri
 
 data class Picture(
     val format: String,
@@ -13,19 +13,6 @@ data class Picture(
     val postUrl: String,
 ) {
     fun getImageUrl(): String {
-        return "https://picsum.photos/$width/$height?image=$id"
+        return Uri.encode("https://picsum.photos/$width/$height?image=$id")
     }
-}
-
-fun PictureResponse.toPicture(): Picture {
-    return Picture(
-        format = this.format,
-        width = this.width,
-        height = this.height,
-        filename = this.filename,
-        id = this.id,
-        author = this.author,
-        authorUrl = this.authorUrl,
-        postUrl = this.postUrl
-    )
 }
