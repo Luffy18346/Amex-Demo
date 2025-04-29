@@ -4,29 +4,32 @@ import androidx.lifecycle.viewModelScope
 import com.luffy18346.amexdemo.domain.model.Picture
 import com.luffy18346.amexdemo.domain.use_case.GetPicturesUseCase
 import com.luffy18346.amexdemo.ui.base.BaseViewModel
+import com.luffy18346.amexdemo.ui.feature.main.MainContract.Effect
+import com.luffy18346.amexdemo.ui.feature.main.MainContract.Event
+import com.luffy18346.amexdemo.ui.feature.main.MainContract.State
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
 class MainViewModel(
     private val getPictures: GetPicturesUseCase,
     private val ioDispatcher: CoroutineDispatcher
-) : BaseViewModel<MainContract.Event, MainContract.State, MainContract.Effect>() {
+) : BaseViewModel<Event, State, Effect>() {
 
     init {
         getPictures()
     }
 
-    override fun setInitialState() = MainContract.State.initial()
+    override fun setInitialState() = State.initial()
 
-    override fun handleEvents(event: MainContract.Event) {
+    override fun handleEvents(event: Event) {
         when (event) {
-            is MainContract.Event.PictureSelection -> setEffect {
-                MainContract.Effect.Navigation.ToPictureDetail(
+            is Event.PictureSelection -> setEffect {
+                Effect.Navigation.ToPictureDetail(
                     event.picture
                 )
             }
 
-            is MainContract.Event.Retry -> getPictures()
+            is Event.Retry -> getPictures()
         }
     }
 
