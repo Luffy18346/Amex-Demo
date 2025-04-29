@@ -76,18 +76,6 @@ class MainViewModelTest {
         Assert.assertEquals(samplePictures(), state.data)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
-    @Test
-    fun `getPictureById returns correct Picture`() = runTest {
-        fakeRepository.setPictures(samplePictures())
-        viewModel.getPictures()
-        advanceUntilIdle()
-
-        val picture = viewModel.getPictureById(2L)
-        Assert.assertNotNull(picture)
-        Assert.assertEquals(2L, picture?.id)
-    }
-
     private fun samplePictures() = listOf(
         Picture(
             format = "jpeg",

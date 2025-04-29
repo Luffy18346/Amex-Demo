@@ -1,4 +1,4 @@
-package com.luffy18346.amexdemo.di
+package com.luffy18346.amexdemo.ui.di
 
 import com.luffy18346.amexdemo.BuildConfig
 import com.luffy18346.amexdemo.data.PicsumPhotosApi

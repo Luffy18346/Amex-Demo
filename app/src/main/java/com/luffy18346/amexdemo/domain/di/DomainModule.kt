@@ -1,4 +1,4 @@
-package com.luffy18346.amexdemo.di
+package com.luffy18346.amexdemo.domain.di
 
 import com.luffy18346.amexdemo.domain.use_case.GetPicturesUseCase
 import org.koin.dsl.module
