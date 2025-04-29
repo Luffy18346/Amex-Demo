@@ -1,7 +1,7 @@
 package com.luffy18346.amexdemo.di
 
-import com.luffy18346.amexdemo.ui.feature.main.MainViewModel
 import com.luffy18346.amexdemo.ui.feature.detail.DetailViewModel
+import com.luffy18346.amexdemo.ui.feature.main.MainViewModel
 import kotlinx.coroutines.Dispatchers
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf

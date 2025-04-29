@@ -1,6 +1,5 @@
 package com.luffy18346.amexdemo.ui.feature.detail
 
-import com.luffy18346.amexdemo.domain.model.Picture
 import com.luffy18346.amexdemo.ui.base.ScreenContract.ViewEvent
 import com.luffy18346.amexdemo.ui.base.ScreenContract.ViewSideEffect
 import com.luffy18346.amexdemo.ui.base.ScreenContract.ViewState

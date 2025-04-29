@@ -3,11 +3,10 @@ package com.luffy18346.amexdemo.ui.navigation
 import androidx.navigation.NavController
 import com.luffy18346.amexdemo.domain.model.Picture
 import kotlinx.serialization.Serializable
-import okhttp3.Route
 
 sealed class NavigationRoutes {  // Work on this...
     @Serializable
-    object Pictures : NavigationRoutes()
+    data object Pictures : NavigationRoutes()
 
     @Serializable
     data class PictureDetails(

@@ -1,7 +1,6 @@
 package com.luffy18346.amexdemo.data.repository
 
 import com.luffy18346.amexdemo.data.PicsumPhotosApi
-import com.luffy18346.amexdemo.data.mapper.toPicture
 import com.luffy18346.amexdemo.data.mapper.toPictureList
 import com.luffy18346.amexdemo.domain.model.Picture
 import com.luffy18346.amexdemo.domain.repository.IPictureRepository

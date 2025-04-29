@@ -1,12 +1,9 @@
 package com.luffy18346.amexdemo.ui.navigation.routes
 
-import android.net.Uri
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavType
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
 import androidx.navigation.toRoute
 import com.luffy18346.amexdemo.ui.feature.detail.DetailContract
 import com.luffy18346.amexdemo.ui.feature.detail.DetailScreen

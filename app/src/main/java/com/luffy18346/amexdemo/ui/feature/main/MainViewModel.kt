@@ -2,8 +2,8 @@ package com.luffy18346.amexdemo.ui.feature.main
 
 import androidx.lifecycle.viewModelScope
 import com.luffy18346.amexdemo.domain.model.Picture
-import com.luffy18346.amexdemo.ui.base.BaseViewModel
 import com.luffy18346.amexdemo.domain.use_case.GetPicturesUseCase
+import com.luffy18346.amexdemo.ui.base.BaseViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
