@@ -31,7 +31,7 @@ class DetailContract {
         }
 
         val verticalArrangement: Arrangement.Vertical
-            get() = if ((pictureDetails?.imageWidth ?: 0) > (pictureDetails?.imageHeight ?: 0)) {
+            get() = if ((pictureDetails?.imageWidth ?: 0) >= (pictureDetails?.imageHeight ?: 0)) {
                 Arrangement.Center
             } else {
                 Arrangement.Top

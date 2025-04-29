@@ -2,42 +2,62 @@ package com.luffy18346.amexdemo.ui.feature.detail
 
 import androidx.compose.foundation.layout.Arrangement
 import com.luffy18346.amexdemo.domain.model.Picture
-import com.luffy18346.amexdemo.ui.utils.getVerticalArrangement
+import com.luffy18346.amexdemo.ui.navigation.NavigationRoutes
 import junit.framework.TestCase.assertEquals
 import org.junit.Test
 
 class DetailScreenLogicTest {
     @Test
     fun `getVerticalArrangement returns Center for landscape images`() {
-        val landscapePicture = Picture(
-            format = "jpeg",
-            width = 1000,
-            height = 500,
-            author = "author1",
-            filename = "1.jpeg",
-            id = 1,
-            postUrl = "dummy_post_url_1",
-            authorUrl = "dummy_author_url_1",
+        val landscapePicture = NavigationRoutes.PictureDetails(
+            imageWidth = 1000,
+            imageHeight = 500,
+            authorName = "author1",
+            fileName = "1.jpeg",
+            imageUrl = "dummy_post_url_1",
         )
-
-        val result = getVerticalArrangement(landscapePicture.width, landscapePicture.height)
-        assertEquals(Arrangement.Center, result)
+        val result = DetailContract.State(
+            isError = false,
+            isLoading = true,
+            image = null,
+            pictureDetails = landscapePicture
+        )
+        assertEquals(Arrangement.Center, result.verticalArrangement)
     }
 
     @Test
     fun `getVerticalArrangement returns Top for portrait images`() {
-        val portraitPicture = Picture(
-            format = "jpeg",
-            width = 500,
-            height = 1000,
-            author = "author2",
-            filename = "2.jpeg",
-            id = 2,
-            postUrl = "dummy_post_url_2",
-            authorUrl = "dummy_author_url_2",
+        val portraitPicture = NavigationRoutes.PictureDetails(
+            imageWidth = 500,
+            imageHeight = 1000,
+            authorName = "author2",
+            fileName = "2.jpeg",
+            imageUrl = "dummy_post_url_2",
         )
+        val result = DetailContract.State(
+            isError = false,
+            isLoading = true,
+            image = null,
+            pictureDetails = portraitPicture
+        )
+        assertEquals(Arrangement.Top, result.verticalArrangement)
+    }
 
-        val result = getVerticalArrangement(portraitPicture.width, portraitPicture.height)
-        assertEquals(Arrangement.Top, result)
+    @Test
+    fun `getVerticalArrangement returns Center when width equals height`() {
+        val squarePicture = NavigationRoutes.PictureDetails(
+            imageWidth = 800,
+            imageHeight = 800,
+            authorName = "author3",
+            fileName = "3.jpeg",
+            imageUrl = "dummy_post_url_3",
+        )
+        val result = DetailContract.State(
+            isError = false,
+            isLoading = true,
+            image = null,
+            pictureDetails = squarePicture
+        )
+        assertEquals(Arrangement.Center, result.verticalArrangement)
     }
 }
