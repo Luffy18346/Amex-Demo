@@ -22,6 +22,7 @@ import com.luffy18346.amexdemo.R
 import com.luffy18346.amexdemo.domain.model.Picture
 import com.luffy18346.amexdemo.ui.base.ScreenContract.ViewEvent
 import com.luffy18346.amexdemo.ui.base.ScreenContract.ViewSideEffect
+import com.luffy18346.amexdemo.ui.navigation.NavigationRoutes.PictureDetails
 import com.luffy18346.amexdemo.ui.utils.getVerticalArrangement
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -34,11 +35,7 @@ import java.net.URL
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(
-    fileName: String,
-    imageUrl: String,
-    authorName: String,
-    imageWidth: Long,
-    imageHeight: Long,
+    pictureDetails: PictureDetails,
     effectFlow: Flow<DetailContract.Effect>,
     onEventSent: (event: DetailContract.Event) -> Unit,
     onNavigationRequested: (navigationEffect: DetailContract.Effect.Navigation) -> Unit,
@@ -50,8 +47,6 @@ fun DetailScreen(
                 is DetailContract.Effect.Navigation.Back -> {
                     onNavigationRequested(effect)
                 }
-
-                else -> {}
             }
         }
     }
@@ -61,7 +56,7 @@ fun DetailScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = fileName,
+                        text = pictureDetails.fileName,
                     )
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -82,15 +77,15 @@ fun DetailScreen(
             )
         }
     ) {
-        imageUrl.let { picture ->
+        pictureDetails.imageUrl.let { picture ->
             Column(
                 modifier = Modifier
                     .padding(paddingValues = it)
                     .fillMaxSize()
                     .verticalScroll(rememberScrollState()),
-                verticalArrangement = getVerticalArrangement(imageWidth, imageHeight)
+                verticalArrangement = getVerticalArrangement(pictureDetails.imageWidth, pictureDetails.imageHeight)
             ) {
-                NetworkImage(picture, fileName)
+                NetworkImage(picture, pictureDetails.fileName)
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -99,7 +94,7 @@ fun DetailScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = authorName,
+                        text = pictureDetails.authorName,
                         style = MaterialTheme.typography.titleLarge.copy(
                             color = MaterialTheme.colorScheme.primary,
                             fontWeight = FontWeight.Bold,

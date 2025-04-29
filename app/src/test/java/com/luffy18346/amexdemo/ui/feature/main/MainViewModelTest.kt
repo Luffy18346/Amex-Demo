@@ -35,6 +35,59 @@ class MainViewModelTest {
         Dispatchers.resetMain()
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `getPictures success updates viewState with correct data`() = runTest {
+        fakeRepository.setPictures(samplePictures())
+
+        viewModel.getPictures()
+        advanceUntilIdle()
+
+        val state = viewModel.viewState.value
+        Assert.assertFalse(state.isLoading)
+        Assert.assertFalse(state.isError)
+        Assert.assertEquals(samplePictures(), state.data)
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `getPictures failure sets isError true`() = runTest {
+        fakeRepository.shouldReturnError = true
+
+        viewModel.getPictures()
+        advanceUntilIdle()
+
+        val state = viewModel.viewState.value
+        Assert.assertFalse(state.isLoading)
+        Assert.assertTrue(state.isError)
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `Retry event triggers getPictures again`() = runTest {
+        fakeRepository.setPictures(samplePictures())
+
+        viewModel.setEvent(MainContract.Event.Retry)
+        advanceUntilIdle()
+
+        val state = viewModel.viewState.value
+        Assert.assertFalse(state.isLoading)
+        Assert.assertFalse(state.isError)
+        Assert.assertEquals(samplePictures(), state.data)
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `getPictureById returns correct Picture`() = runTest {
+        fakeRepository.setPictures(samplePictures())
+        viewModel.getPictures()
+        advanceUntilIdle()
+
+        val picture = viewModel.getPictureById(2L)
+        Assert.assertNotNull(picture)
+        Assert.assertEquals(2L, picture?.id)
+    }
+
     private fun samplePictures() = listOf(
         Picture(
             format = "jpeg",
@@ -57,53 +110,4 @@ class MainViewModelTest {
             authorUrl = "dummy_author_url_2",
         ),
     )
-
-    @Test
-    fun `getPictures success updates viewState with correct data`() = runTest {
-        fakeRepository.setPictures(samplePictures())
-
-        viewModel.getPictures()
-        advanceUntilIdle()
-
-        val state = viewModel.viewState.value
-        Assert.assertFalse(state.isLoading)
-        Assert.assertFalse(state.isError)
-        Assert.assertEquals(samplePictures(), state.data)
-    }
-
-    @Test
-    fun `getPictures failure sets isError true`() = runTest {
-        fakeRepository.shouldReturnError = true
-
-        viewModel.getPictures()
-        advanceUntilIdle()
-
-        val state = viewModel.viewState.value
-        Assert.assertFalse(state.isLoading)
-        Assert.assertTrue(state.isError)
-    }
-
-    @Test
-    fun `Retry event triggers getPictures again`() = runTest {
-        fakeRepository.setPictures(samplePictures())
-
-        viewModel.setEvent(MainContract.Event.Retry)
-        advanceUntilIdle()
-
-        val state = viewModel.viewState.value
-        Assert.assertFalse(state.isLoading)
-        Assert.assertFalse(state.isError)
-        Assert.assertEquals(samplePictures(), state.data)
-    }
-
-    @Test
-    fun `getPictureById returns correct Picture`() = runTest {
-        fakeRepository.setPictures(samplePictures())
-        viewModel.getPictures()
-        advanceUntilIdle()
-
-        val picture = viewModel.getPictureById(2L)
-        Assert.assertNotNull(picture)
-        Assert.assertEquals(2L, picture?.id)
-    }
 }

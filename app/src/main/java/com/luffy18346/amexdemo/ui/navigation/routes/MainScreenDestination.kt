@@ -8,12 +8,12 @@ import androidx.navigation.compose.composable
 import com.luffy18346.amexdemo.ui.feature.main.MainContract
 import com.luffy18346.amexdemo.ui.feature.main.MainScreen
 import com.luffy18346.amexdemo.ui.feature.main.MainViewModel
-import com.luffy18346.amexdemo.ui.navigation.Navigation.Routes.PICTURES
+import com.luffy18346.amexdemo.ui.navigation.NavigationRoutes.Pictures
 import com.luffy18346.amexdemo.ui.navigation.navigateToRepos
 import org.koin.androidx.compose.koinViewModel
 
 fun NavGraphBuilder.mainScreenRoute(navController: NavController) {
-    composable(PICTURES) {
+    composable<Pictures> {
         val viewModel: MainViewModel = koinViewModel<MainViewModel>()
         MainScreenDestination(viewModel, navController)
     }
