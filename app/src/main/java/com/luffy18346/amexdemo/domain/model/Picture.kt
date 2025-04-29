@@ -10,7 +10,5 @@ data class Picture(
     val authorUrl: String,
     val postUrl: String,
 ) {
-    fun getImageUrl(): String {
-        return "https://picsum.photos/$width/$height?image=$id"
-    }
+    fun getImageUrl() = "https://picsum.photos/$width/$height?image=$id"
 }

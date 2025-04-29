@@ -31,7 +31,7 @@ class DetailViewModel(
         }
     }
 
-    fun loadImage() {
+    private fun loadImage() {
         setState { copy(isLoading = true, isError = false, pictureDetails = this@DetailViewModel.pictureDetails) }
         viewModelScope.launch(ioDispatcher) {
             try {
@@ -41,7 +41,7 @@ class DetailViewModel(
                 val loadedBitmap = BitmapFactory.decodeStream(inputStream)
                 inputStream.close()
                 connection.disconnect()
-                setState { copy(image = loadedBitmap, isLoading = false, pictureDetails = this@DetailViewModel.pictureDetails) }
+                setState { copy(image = loadedBitmap, isLoading = false) }
             } catch (e: IOException) {
                 e.printStackTrace()
                 setState { copy(isError = true, isLoading = false) }

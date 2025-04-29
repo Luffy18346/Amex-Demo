@@ -4,9 +4,9 @@ import androidx.navigation.NavController
 import com.luffy18346.amexdemo.domain.model.Picture
 import kotlinx.serialization.Serializable
 
-sealed class NavigationRoutes {  // Work on this...
+sealed interface NavigationRoutes {
     @Serializable
-    data object Pictures : NavigationRoutes()
+    data object Pictures : NavigationRoutes
 
     @Serializable
     data class PictureDetails(
@@ -15,9 +15,8 @@ sealed class NavigationRoutes {  // Work on this...
         val imageWidth: Long,
         val imageHeight: Long,
         val imageUrl: String,
-    ) : NavigationRoutes()
+    ) : NavigationRoutes
 }
-
 
 fun NavController.navigateToRepos(picture: Picture) {
     navigate(

@@ -43,8 +43,4 @@ class MainViewModel(
             }
         }
     }
-
-    fun getPictureById(pictureId: Long): Picture? {
-        return viewState.value.data?.find { it.id == pictureId }
-    }
 }
