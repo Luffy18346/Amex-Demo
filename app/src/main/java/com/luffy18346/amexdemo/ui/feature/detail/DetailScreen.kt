@@ -91,30 +91,31 @@ fun DetailScreen(
             )
         }
     ) {
-        pictureDetails.imageUrl.let { picture ->
-            Column(
+        Column(
+            modifier = Modifier
+                .padding(paddingValues = it)
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = getVerticalArrangement(
+                pictureDetails.imageWidth,
+                pictureDetails.imageHeight
+            )
+        ) {
+            NetworkImage(pictureDetails.imageUrl, pictureDetails.fileName)
+            Row(
                 modifier = Modifier
-                    .padding(paddingValues = it)
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState()),
-                verticalArrangement = getVerticalArrangement(pictureDetails.imageWidth, pictureDetails.imageHeight)
+                    .fillMaxWidth()
+                    .padding(dimensionResource(R.dimen.padding_16dp)),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                NetworkImage(picture, pictureDetails.fileName)
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(dimensionResource(R.dimen.padding_16dp)),
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = pictureDetails.authorName,
-                        style = MaterialTheme.typography.titleLarge.copy(
-                            color = MaterialTheme.colorScheme.primary,
-                            fontWeight = FontWeight.Bold,
-                        ),
-                    )
-                }
+                Text(
+                    text = pictureDetails.authorName,
+                    style = MaterialTheme.typography.titleLarge.copy(
+                        color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold,
+                    ),
+                )
             }
         }
     }
