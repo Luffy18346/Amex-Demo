@@ -1,7 +1,9 @@
 package com.luffy18346.amexdemo.ui.feature.detail
 
 import android.graphics.BitmapFactory
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.toRoute
 import com.luffy18346.amexdemo.ui.base.BaseViewModel
 import com.luffy18346.amexdemo.ui.feature.detail.DetailContract.Effect
 import com.luffy18346.amexdemo.ui.feature.detail.DetailContract.Event
@@ -14,9 +16,11 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 class DetailViewModel(
-    private val pictureDetails: NavigationRoutes.PictureDetails,
+    savedStateHandle: SavedStateHandle,
     private val ioDispatcher: CoroutineDispatcher,
 ) : BaseViewModel<Event, State, Effect>() {
+
+    private val _pictureDetails = savedStateHandle.toRoute<NavigationRoutes.PictureDetails>()
 
     init {
         loadImage()
@@ -32,10 +36,10 @@ class DetailViewModel(
     }
 
     private fun loadImage() {
-        setState { copy(isLoading = true, isError = false, pictureDetails = this@DetailViewModel.pictureDetails) }
+        setState { copy(isLoading = true, isError = false, pictureDetails = this@DetailViewModel._pictureDetails) }
         viewModelScope.launch(ioDispatcher) {
             try {
-                val connection = URL(pictureDetails.imageUrl).openConnection() as HttpURLConnection
+                val connection = URL(viewState.value.pictureDetails?.imageUrl).openConnection() as HttpURLConnection
                 connection.connect()
                 val inputStream = connection.inputStream
                 val loadedBitmap = BitmapFactory.decodeStream(inputStream)

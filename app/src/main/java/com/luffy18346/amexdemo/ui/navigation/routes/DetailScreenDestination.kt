@@ -16,13 +16,8 @@ import org.koin.core.parameter.parametersOf
 
 fun NavGraphBuilder.detailScreenRoute(navController: NavController) {
     composable<PictureDetails> { backStackEntry ->
-        val pictureDetails: PictureDetails = backStackEntry.toRoute()
-        val viewModel: DetailViewModel =
-            koinViewModel(parameters = { parametersOf(pictureDetails) })
-        DetailScreenDestination(
-            viewModel,
-            navController
-        )
+        val viewModel: DetailViewModel = koinViewModel<DetailViewModel>()
+        DetailScreenDestination(viewModel, navController)
     }
 }
 

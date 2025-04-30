@@ -13,5 +13,5 @@ val appModule = module {
     }
 
     viewModel { MainViewModel(get(), get(named("IODispatcher"))) }
-    viewModel { parameters -> DetailViewModel(parameters.get(), get(named("IODispatcher"))) }
+    viewModel { DetailViewModel(get(), get(named("IODispatcher"))) }
 }
