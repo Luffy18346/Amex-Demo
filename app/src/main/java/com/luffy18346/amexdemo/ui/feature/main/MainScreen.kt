@@ -45,8 +45,6 @@ fun MainScreen(
                 is MainContract.Effect.Navigation.ToPictureDetail -> {
                     onNavigationRequested(effect)
                 }
-
-                else -> {}
             }
         }
     }
