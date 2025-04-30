@@ -29,8 +29,3 @@ fun NavController.navigateToRepos(picture: Picture) {
         )
     )
 }
-
-// Data Domain - dependency
-// DI
-// Dont share a common viewModel.... ===
-// Navigation
