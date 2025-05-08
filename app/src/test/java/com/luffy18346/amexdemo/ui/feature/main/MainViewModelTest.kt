@@ -17,9 +17,20 @@ import org.junit.Test
 
 class MainViewModelTest {
 
+    // Different kinds of Rules... @Get:Rule
+
     private lateinit var viewModel: MainViewModel
     private lateinit var fakeRepository: FakePictureRepositoryImpl
     private val testDispatcher = StandardTestDispatcher()
+
+    //You can definitely use MockK instead of writing a manual FakePictureRepositoryImpl.
+    // | Feature                  | **Fake (like `FakePictureRepositoryImpl`)**      | **MockK / Mocking**                     |
+    //|--------------------------|--------------------------------------------|----------------------------------------|
+    //| **Definition**           | A real implementation with test-controlled behavior | A dynamically created object with predefined responses |
+    //| **Real Logic?**          | Yes, it may contain real or simplified logic | No, it's a stubbed interface/class      |
+    //| **Maintenance**          | Needs manual code for logic                 | Less boilerplate, easier to set up     |
+    //| **Use When**             | - Behavior depends on internal logic<br>- You want to simulate realistic usage | - You only care about verifying interactions or stubbing return values |
+    //| **Best For**             | Integration or medium-level tests            | Unit tests, verifying calls/params     |
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Before

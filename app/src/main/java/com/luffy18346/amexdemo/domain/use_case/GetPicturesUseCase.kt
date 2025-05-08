@@ -5,9 +5,11 @@ import com.luffy18346.amexdemo.domain.repository.IPictureRepository
 
 class GetPicturesUseCase(
     private val pictureRepository: IPictureRepository
-): BaseUseCase<Result<List<Picture>>, Unit> {
+) {
 
-    override suspend fun invoke(parameters: Unit?): Result<List<Picture>> {
+    suspend operator fun invoke(parameters: Unit?): Result<List<Picture>> {
         return pictureRepository.getPictures()
     }
 }
+
+// Operator function without using BaseUseCase

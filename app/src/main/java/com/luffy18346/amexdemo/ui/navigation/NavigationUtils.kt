@@ -18,6 +18,8 @@ sealed class NavigationRoutes {
     ) : NavigationRoutes()
 }
 
+// SharedViewModel or Store the list in singleton or repository and pass the id and
+// then fetch the detail object in detail screen
 fun NavController.navigateToRepos(picture: Picture) {
     navigate(
         route = NavigationRoutes.PictureDetails(

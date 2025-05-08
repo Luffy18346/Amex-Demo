@@ -6,6 +6,7 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -25,7 +26,16 @@ val networkModule = module {
             .build()
     }
 
-    single<Retrofit> {
+//    // Multiple retrofit instances with different names and different base urls...
+//    single<Retrofit>(named("Retrofit2")) {
+//        Retrofit.Builder()
+//            .baseUrl(BuildConfig.BASE_URL)
+//            .addConverterFactory(MoshiConverterFactory.create(get()))
+//            .client(get())
+//            .build()
+//    }
+
+    single<Retrofit>/*(named("Retrofit1"))*/ {
         Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create(get()))

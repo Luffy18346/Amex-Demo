@@ -36,7 +36,7 @@ class MainViewModel(
     fun getPictures() {
         setState { copy(isLoading = true, isError = false) }
         viewModelScope.launch(ioDispatcher) {
-            getPictures.invoke().onSuccess {
+            getPictures.invoke(null).onSuccess {
                 setState { copy(data = it, isLoading = false) }
             }.onFailure {
                 setState { copy(isError = true, isLoading = false) }

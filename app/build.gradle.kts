@@ -1,3 +1,4 @@
+import org.codehaus.groovy.runtime.ArrayTypeUtils.dimension
 import java.util.Properties
 
 plugins {
@@ -26,9 +27,20 @@ android {
         buildConfigField("String", "BASE_URL", properties.getProperty("BASE_URL"))
     }
 
+    // Build Types for different url per different environment
     buildTypes {
+        debug {
+            applicationIdSuffix = ".debug"
+//            buildConfigField("String", "BASE_URL", "\"https://dev.api.com/\"")
+        }
+//        create("betaRelease") {
+//            isMinifyEnabled = false
+//            isDebuggable = false
+//            buildConfigField("String", "BASE_URL", "\"https://dev.api.com/\"")
+//        }
         release {
             isMinifyEnabled = false
+//            buildConfigField("String", "BASE_URL", "\"https://dev.api.com/\"")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -49,6 +61,28 @@ android {
         resValues = false
         shaders = false
     }
+
+//    flavorDimensions += "environment"
+
+    // Product Flavours
+//    productFlavors {
+//        create("dev") {
+//            dimension = "environment"
+//            buildConfigField("String", "BASE_URL", "\"https://dev.api.com/\"")
+//            applicationIdSuffix = ".dev"
+//            versionNameSuffix = "-dev"
+//        }
+//        create("staging") {
+//            dimension = "environment"
+//            buildConfigField("String", "BASE_URL", "\"https://staging.api.com/\"")
+//            applicationIdSuffix = ".staging"
+//            versionNameSuffix = "-staging"
+//        }
+//        create("prod") {
+//            dimension = "environment"
+//            buildConfigField("String", "BASE_URL", "\"https://api.com/\"")
+//        }
+//    }
 }
 
 dependencies {
